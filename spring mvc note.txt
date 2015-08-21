@@ -1,0 +1,45 @@
+=================== PROXY for REST-TEMPLATE
+
+SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("my.proxy.com", 9999));
+clientHttpRequestFactory.setProxy(proxy);
+
+RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
+ResponseEntity<String> response = restTemplate.getForEntity(
+        "https://data.sparkfun.com/streams/dZ4EVmE8yGCRGx5XRX1W.json",
+        String.class);
+
+
+
+==================== BASIC AUTHEN WITH REST-TEMPLATE
+
+public static <T>JsonNode AuthenticatedPost(String jsessionId, String url, T dataBody)
+	{
+		HttpHeaders header= new HttpHeaders();
+		header.add("Cookie", "JSESSIONID= " + jsessionId);
+		
+		String jsonData = JsonHelper.object2JsonString(dataBody);
+		HttpEntity<String> entity = new HttpEntity<String>(jsonData,header);
+		
+		ResponseEntity<String> res12 =restTem.exchange(
+				url, HttpMethod.POST, entity,String.class);
+		String rs1 = res12.getBody();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode actualObj = null;
+		try {
+			actualObj = mapper.readTree(rs1);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return actualObj;
+	}	
+
+
+=================== SVN log limit
+svn log -l10
+
