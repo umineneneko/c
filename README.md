@@ -1,8 +1,8 @@
 # Learning C programming - level 1
-** Basic **
-** Data Structure **
-** Pointer **
-** Socket Programming **
+- Basic
+- Data Structure
+- Pointer
+- Socket Programming
 
 
 # References
