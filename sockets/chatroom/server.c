@@ -82,7 +82,8 @@ void* connection_handler(void* socket_desc){
 		puts("Sent message to client");
 		
 	while( (read_size = recv(sock, client_message, 2000, 0)) > 0){
-		puts(client_message);
+		printf("Client %d: %s\r\n", sock, client_message);
+		printf("Server:");
 		//fgets(to_client, sizeof(to_client), stdin);
 		scanf("%s", to_client);
 		write(sock, to_client, strlen(to_client));
